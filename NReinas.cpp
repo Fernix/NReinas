@@ -34,42 +34,43 @@ using namespace std;
 				}
 				
 				pos++;
-			}	
-			//ultimo = pilaReinas.top();
+			}
+			
 			reinasAux.pop();
 		}
-		
-		
 		
 		
 	}
 	
 int acomodarReinas() {
 		
+		buscarPosicion();
+		if (!pilaReinas.empty() and pilaReinas.top()[1] > totalReinas) {
 		
-		
-		if (reinasAcomodadas == totalReinas) {
-			 cout<<"\n FIN \n";
-			 return 0;
+			cout<<pilaReinas.top()[0]<<"| Y: "<<pilaReinas.top()[1]<<"\n";
+			pilaReinas.pop();
+			reinasAcomodadas--;
+			cout<<pilaReinas.top()[0]<<"| Y: "<<pilaReinas.top()[1]<<"\n";
+			siguiente = {pilaReinas.top()[0],pilaReinas.top()[1]+1};
+			
+			pilaReinas.pop();
+			
+			cout<<pilaReinas.top()[0]<<"| Y: "<<pilaReinas.top()[1]<<"\n";
 			
 		}
-		
-		
-		//if (ultimo[1]<totalReinas) {
-			//pilaReinas.pop();
-			
-		//}
-		
-		buscarPosicion();
-		
+		if (reinasAcomodadas == totalReinas+1) {
+			cout<<"\n FIN \n";
+			return 0;
+		}	
 		reinasAcomodadas++;	
-		pilaReinas.push(siguiente);
-		
-		siguiente[0]++;
-		siguiente[1] = 0;
-		ultimo = pilaReinas.top();
+			pilaReinas.push(siguiente);
+			
+			siguiente[0]++;
+			siguiente[1] = 0;
+			
 		
 		acomodarReinas();
+		
 		
 		
 		
@@ -84,11 +85,11 @@ int acomodarReinas() {
 int main(int argc, char *argv[]) {
 	cout<<"Introduzca el total de Reinas que acomodar: ";
 	cin>>totalReinas;
-	
+
 	acomodarReinas();
 	
 	while (!pilaReinas.empty()) {
-		cout<<pilaReinas.top()[0]<<"|"<<pilaReinas.top()[1]<<"\n";
+		cout<<pilaReinas.top()[0]<<"| Y: "<<pilaReinas.top()[1]<<"\n";
 		pilaReinas.pop();
 	}
 
